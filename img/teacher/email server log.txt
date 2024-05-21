@@ -1,0 +1,43 @@
+CASE 1
+Custom.properties
+conf.mailhandler.ntf_sndr_addr=user1@domainXX.com	
+conf.mailhandler.email.domain=domainXX.com
+conf.mailhandler.mail.smtp.host=smtp.gmail.com:587
+conf.mailhandler.mail.smtp.auth=true
+conf.mailhandler.mail.user=user1
+conf.mailhandler.mail.transport.protocol=smtps
+conf.mailhandler.mail.smtp.starttls.enable=true
+conf.mailhandler.mail.smtp.starttls.required=false
+
+passwords.properties
+conf.password.SMTP=correctpassword
+
+Logs from JBoss
+
+03:32:01,733 INFO  [stdout] (Appian Work Item - 1 - ProcessExec00 : UnattendedJavaActivityRequest) 2017-11-07 03:32:01,731 [Appian Work Item - 1 - ProcessExec00 : UnattendedJavaActivityRequest] ERROR com.appiancorp.process.runtime.activities.SendEmailActivity - javax.mail.MessagingException: Could not connect to SMTP host: smtp.gmail.com, port: 587;
+Caused by: javax.mail.MessagingException: Could not connect to SMTP host: smtp.gmail.com, port: 587;
+  nested exception is:
+	javax.net.ssl.SSLException: Unrecognized SSL message, plaintext connection?
+
+	
+CASE 2
+Custom.properties	
+conf.mailhandler.ntf_sndr_addr=user1@domainXX.com	
+conf.mailhandler.email.domain=domainXX.com
+conf.mailhandler.mail.smtp.host=smtp.gmail.com:587
+conf.mailhandler.mail.smtp.auth=true
+conf.mailhandler.mail.user=user1
+conf.mailhandler.mail.transport.protocol=smtp
+conf.mailhandler.mail.smtp.starttls.enable=true
+conf.mailhandler.mail.smtp.starttls.required=true
+
+passwords.properties
+conf.password.SMTP=correctpassword
+
+Logs from JBoss
+03:51:51,675 INFO  [stdout] (Appian Work Item - 1 - ProcessExec02 : UnattendedJavaActivityRequest) 2017-11-07 03:51:51,675 [Appian Work Item - 1 - ProcessExec02 : UnattendedJavaActivityRequest] ERROR com.appiancorp.ap2.mail.Mail - Could not send mail via smtp.gmail.com:587 to userTo@gmail.com 
+......
+03:51:51,678 INFO  [stdout] (Appian Work Item - 1 - ProcessExec02 : UnattendedJavaActivityRequest) 2017-11-07 03:51:51,677 [Appian Work Item - 1 - ProcessExec02 : UnattendedJavaActivityRequest] ERROR com.appiancorp.process.runtime.activities.SendEmailActivity - javax.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. 
+.........
+Caused by: javax.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials m9sm415570pff.26 - gsmtp
